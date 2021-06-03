@@ -10,10 +10,14 @@ export function readAllShoutOuts():Promise<ShoutOut[]> {
     return axios.get(baseUrl).then(res => res.data);
   }
 
-  export function createShoutOut(shoutOut: ShoutOut):Promise<ShoutOut> {
+export function readAllZeeShoutOuts():Promise<ShoutOut[]> {
+    return axios.get(`${baseUrl}/ ${encodeURIComponent("Zee")}`).then(res => res.data);
+  }
+
+export function createShoutOut(shoutOut: ShoutOut):Promise<ShoutOut> {
     return axios.post(baseUrl, shoutOut).then(res => res.data);
   }
   
-  export function deleteShoutOut(shoutOutId: string):Promise<void> {
+export function deleteShoutOut(shoutOutId: string):Promise<void> {
     return axios.delete(`${baseUrl}/${encodeURIComponent(shoutOutId)}`);
   }
