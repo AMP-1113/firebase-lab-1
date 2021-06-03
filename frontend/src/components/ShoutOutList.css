@@ -8,5 +8,6 @@
 
 button {
     background-color: white;
-    border: 1px solid #999
+    border: 1px solid #999;
+    margin-bottom: 10px;
 }
