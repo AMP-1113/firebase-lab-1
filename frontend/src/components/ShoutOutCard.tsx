@@ -11,7 +11,7 @@ function ShoutOutCard({shoutOut, onDelete}: Props) {
     return (
         <div className="ShoutOutCard">
             <h3>Shout out to {shoutOut.to} </h3>
-            <p>-from {shoutOut.from} </p>
+            <p className="ShoutOutCard_from">-from {shoutOut.from} </p>
             <p> {shoutOut.message} </p>
             <button onClick={onDelete}>Delete</button>
         </div>

@@ -1,5 +1,13 @@
 
 .ShoutOutCard {
+    text-align: center;
     background-color: white;
     border: 1px solid #aaa;
+    width: 50%;
+    margin: 10px;
 }
+
+.ShoutOutCard_from {
+    color: red;
+}
+
