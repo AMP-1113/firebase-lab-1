@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import ShoutOut from "../model/ShoutOut";
 import { createShoutOut, deleteShoutOut, readAllShoutOuts } from "../service/ShoutOutApiService";
 import ShoutOutCard from "./ShoutOutCard";
+import ShoutOutForm from "./ShoutOutForm";
+import './ShoutOutList.css';
 
 function ShoutOutList() {
   // array of shoutouts from the API
@@ -19,11 +21,11 @@ function ShoutOutList() {
     });
   }
 
-  function handleAddStudent(shoutOut: ShoutOut): void {
+  function handleAddShoutOut(shoutOut: ShoutOut): void {
     createShoutOut(shoutOut).then(loadShoutOuts);
   }
 
-  function handleDeleteStudent(shoutOutId: string|undefined): void {
+  function handleDeleteShoutOut(shoutOutId: string|undefined): void {
     if (shoutOutId) {
       deleteShoutOut(shoutOutId).then(loadShoutOuts);
     }
@@ -38,11 +40,15 @@ function ShoutOutList() {
         :
           shoutouts.map(eachShoutOut => 
             <ShoutOutCard key={eachShoutOut._id} shoutOut={eachShoutOut}
-                          onDelete={() => handleDeleteStudent(eachShoutOut._id)}
+                          onDelete={() => handleDeleteShoutOut(eachShoutOut._id)}
             />)
       }           
+            <h3>Leave a Shout Out</h3>
+            <ShoutOutForm onSubmit={handleAddShoutOut} />
         </div>
-    )
+    );
 }
 
 export default ShoutOutList;
+
+
