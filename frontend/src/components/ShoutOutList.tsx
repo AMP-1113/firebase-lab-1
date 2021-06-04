@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/auth-context";
+import { signInWithGoogle } from "../firebaseConfig";
 import ShoutOut from "../model/ShoutOut";
 import { createShoutOut, deleteShoutOut, readAllShoutOuts } from "../service/ShoutOutApiService";
 import ShoutOutCard from "./ShoutOutCard";
@@ -9,6 +11,7 @@ function ShoutOutList() {
   // array of shoutouts from the API
   const [ shoutouts, setShoutOuts ] = useState<ShoutOut[]>([]);
   const [ shoutOutsLoaded, setShoutOutsLoaded ] = useState(false);
+  const { user } = useContext(AuthContext)
 
   useEffect(() => {
     loadShoutOuts();
@@ -42,9 +45,18 @@ function ShoutOutList() {
                     <ShoutOutCard key={eachShoutOut._id} shoutOut={eachShoutOut}
                                   onDelete={() => handleDeleteShoutOut(eachShoutOut._id)}
                     />)
-              }           
-            <h3>Leave a Shout Out</h3>
-            <ShoutOutForm onSubmit={handleAddShoutOut} />
+              } 
+              { !user ? 
+              <p>Sign in to leave a shoutout
+                <button onClick={signInWithGoogle} >Sign in with Google</button>
+              </p>
+              :  
+              <p>
+                <h3>Leave a Shout Out</h3>
+                <ShoutOutForm onSubmit={handleAddShoutOut} />
+              </p>
+              }       
+
         </div>
     );
 }

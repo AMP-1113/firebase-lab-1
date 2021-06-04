@@ -2,15 +2,19 @@ import './App.css';
 import ShoutOutList from './components/ShoutOutList';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import UserRoute from './components/UserRoute';
+import Header from './components/Header';
 
 
 function App() {
   return (
     <div className="App">
       <Router>
+      <Header />
       <h1>SHOUT OUTS</h1>
       <nav>
-        <Link to="/user/Zee">Shout Outs to Zee</Link>
+        <ul>
+          <li><Link to="/user/Zee">Shout Outs to Zee</Link></li>
+        </ul>
       </nav>
       <Switch>
         <Route path="/user/:name">

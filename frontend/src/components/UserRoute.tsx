@@ -15,7 +15,7 @@ function UserRoute() {
 
     useEffect(() => {
         loadShoutOuts();
-      }, []);
+      }, [name]);
     
       function loadShoutOuts() {
         readAllZeeShoutOuts().then(shoutOutsFromApi => {
@@ -32,7 +32,12 @@ function UserRoute() {
     return (
         <div className="UserRoute">
             <h1>Shout Outs to Zee</h1>
-            {                   shoutouts.map(eachShoutOut => 
+            { !shoutOutsLoaded ?
+                  <p className="ShoutOutList__message">Loading...</p>
+                : shoutouts.length === 0 ?
+                  <p className="ShoutOutList__message">No Shout Outs</p>
+                :                  
+            shoutouts.map(eachShoutOut => 
                     <ShoutOutCard key={eachShoutOut._id} shoutOut={eachShoutOut}
                                   onDelete={() => handleDeleteShoutOut(eachShoutOut._id)}
                     />) }

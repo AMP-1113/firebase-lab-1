@@ -16,15 +16,25 @@ app.get( "/hello", (req, res) => {
 
 // 1. GET /shoutouts
 app.get("/", async (req, res) => {
+  const to = req.query.to as string;
+  
+  const mongoQuery: any = {};
+  // if a year was specified, add it to the mongo query
+  if (to) {
+    mongoQuery.to = to; // { name: ""  }
+  } 
+
     try {
       const client = await getClient();
-      const results = await client.db().collection<ShoutOut>('shoutOuts').find().toArray();
+      const results = await client.db().collection<ShoutOut>('shoutOuts').find(mongoQuery).toArray();
       res.json(results); // send JSON results
     } catch (err) {
       console.error("FAIL", err);
       res.status(500).json({message: "Internal Server Error"});
     }
   });
+
+
 
   // 2. POST /shoutouts
 app.post("/", async (req, res) => {

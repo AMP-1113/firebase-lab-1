@@ -14,7 +14,7 @@ import "firebase/auth";
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+
 
   export const authProvider = new firebase.auth.GoogleAuthProvider();
 
