@@ -1,7 +1,7 @@
 import './App.css';
 import ShoutOutList from './components/ShoutOutList';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import UserRoute from './components/UserRoute';
+import ShoutOutsForName from './components/ShoutOutsForName';
 import Header from './components/Header';
 
 
@@ -17,9 +17,9 @@ function App() {
         </ul>
       </nav>
       <Switch>
-        <Route path="/user/:name">
+        <Route path="/user/:to">
           <Link to="/">Back to all Shout Outs</Link>
-          <UserRoute />
+          <ShoutOutsForName />
         </Route>
         <Route path="/">
           <ShoutOutList />

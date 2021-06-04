@@ -1,6 +1,6 @@
 export default interface ShoutOut {
     _id?: string;
     to: string;
-    from: string;
+    from: any;
     message: string;
 }

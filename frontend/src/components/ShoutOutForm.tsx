@@ -9,7 +9,6 @@ interface Props {
 
 function ShoutOutForm( {onSubmit}: Props ) {
     const [ to, setTo ] = useState("");
-    const [ from, setFrom ] = useState("");
     const [ message, setMessage ] = useState("");
     const { user } = useContext(AuthContext)
 
@@ -17,14 +16,13 @@ function ShoutOutForm( {onSubmit}: Props ) {
         event.preventDefault();
         const shoutOut: ShoutOut = {
           to: to,
-          from: from,
+          from: user?.displayName,
           message: message
         }
         onSubmit(shoutOut);
     
         // clear form
         setTo("");
-        setFrom("");
         setMessage("");
       }
     
@@ -35,15 +33,11 @@ function ShoutOutForm( {onSubmit}: Props ) {
                 <label htmlFor="ShoutOutForm_to">To:</label>
                 <input id="ShoutOutForm_to" value={to} onChange={e => setTo(e.target.value)} required />
             </p>
-            { !user ?
+            { 
             <p>
                 <label htmlFor="ShoutOutForm_from">From:</label>
-                <input id="ShoutOutForm_from" value={from} onChange={e => setFrom(e.target.value)} required />
-            </p>
-            :
-            <p>
-                <label htmlFor="ShoutOutForm_from">From:</label>
-                <input id="ShoutOutForm_from" value={user.displayName?.toString()} onChange={e => setFrom(e.target.value)} required />                
+                {user!.displayName}
+                {/* <input id="ShoutOutForm_from" value={user.displayName?.toString()} onChange={e => setFrom(e.target.value)} required />                 */}
             </p>            
             }
 

@@ -51,10 +51,10 @@ function ShoutOutList() {
                 <button onClick={signInWithGoogle} >Sign in with Google</button>
               </p>
               :  
-              <p>
-                <h3>Leave a Shout Out</h3>
+              <div>
+                <p>Leave a Shout Out</p>
                 <ShoutOutForm onSubmit={handleAddShoutOut} />
-              </p>
+              </div>
               }       
 
         </div>

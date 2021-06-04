@@ -13,7 +13,7 @@ function Header() {
             <button onClick={signOut} >Sign out</button>
             { user && <div>
                 Welcome {user.displayName}!
-                { !!user.photoURL && <img src={user.photoURL} alt="photo" />}
+                { !!user.photoURL && <img src={user.photoURL} alt="" />}
             </div> }
         </header>
     )

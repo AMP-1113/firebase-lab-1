@@ -17,9 +17,8 @@ app.get( "/hello", (req, res) => {
 // 1. GET /shoutouts
 app.get("/", async (req, res) => {
   const to = req.query.to as string;
-  
   const mongoQuery: any = {};
-  // if a year was specified, add it to the mongo query
+  // if a to was specified, add it to the mongo query
   if (to) {
     mongoQuery.to = to; // { name: ""  }
   } 

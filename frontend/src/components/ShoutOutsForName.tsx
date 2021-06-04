@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ShoutOut from "../model/ShoutOut";
-import { deleteShoutOut, readAllZeeShoutOuts } from "../service/ShoutOutApiService";
+import { deleteShoutOut, readShoutOutsByTo } from "../service/ShoutOutApiService";
 import ShoutOutCard from "./ShoutOutCard";
+import './ShoutOutsForName.css';
 
 interface RouteParams {
-    name: string;
+    to: string;
 }
 
-function UserRoute() {
+function ShoutOutsForName() {
+    const { to } = useParams<RouteParams>(); 
+
     const [ shoutouts, setShoutOuts ] = useState<ShoutOut[]>([]);
     const [ shoutOutsLoaded, setShoutOutsLoaded ] = useState(false);
-    const { name } = useParams<RouteParams>(); 
 
     useEffect(() => {
         loadShoutOuts();
-      }, [name]);
+      }, [to]);
     
       function loadShoutOuts() {
-        readAllZeeShoutOuts().then(shoutOutsFromApi => {
+        console.log(to);
+        readShoutOutsByTo(to).then(shoutOutsFromApi => {
           setShoutOuts(shoutOutsFromApi);
           setShoutOutsLoaded(true);
         });
@@ -30,7 +33,7 @@ function UserRoute() {
         }
       }
     return (
-        <div className="UserRoute">
+        <div className="ShoutOutsForName">
             <h1>Shout Outs to Zee</h1>
             { !shoutOutsLoaded ?
                   <p className="ShoutOutList__message">Loading...</p>
@@ -45,4 +48,4 @@ function UserRoute() {
     )
 }
 
-export default UserRoute;
+export default ShoutOutsForName;
