@@ -16,11 +16,7 @@ function App() {
           <ShoutOutsForName />
         </Route>
         <Route path="/">
-        <nav>
-          <ul>
-            <li><Link to="/user/Zee">Shout Outs to Zee</Link></li>
-          </ul>
-        </nav>
+          <Link to="/user/Zee">Shout Outs to Zee</Link>
           <ShoutOutList />
         </Route>
       </Switch>
