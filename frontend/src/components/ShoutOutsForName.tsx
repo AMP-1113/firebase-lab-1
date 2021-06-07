@@ -19,6 +19,7 @@ function ShoutOutsForName() {
         loadShoutOuts();
       }, [to]);
     
+      
       function loadShoutOuts() {
         console.log(to);
         readShoutOutsByTo(to).then(shoutOutsFromApi => {

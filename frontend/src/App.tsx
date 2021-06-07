@@ -10,18 +10,17 @@ function App() {
     <div className="App">
       <Router>
       <Header />
-      <h1>SHOUT OUTS</h1>
-      <nav>
-        <ul>
-          <li><Link to="/user/Zee">Shout Outs to Zee</Link></li>
-        </ul>
-      </nav>
       <Switch>
         <Route path="/user/:to">
           <Link to="/">Back to all Shout Outs</Link>
           <ShoutOutsForName />
         </Route>
         <Route path="/">
+        <nav>
+          <ul>
+            <li><Link to="/user/Zee">Shout Outs to Zee</Link></li>
+          </ul>
+        </nav>
           <ShoutOutList />
         </Route>
       </Switch>
