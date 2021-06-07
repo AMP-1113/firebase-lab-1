@@ -17,7 +17,7 @@ function ShoutOutsForName() {
 
     useEffect(() => {
         loadShoutOuts();
-      }, [to]);
+      }, );
     
       
       function loadShoutOuts() {
