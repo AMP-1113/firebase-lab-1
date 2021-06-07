@@ -18,9 +18,9 @@ function ShoutOutCard({shoutOut, onDelete}: Props) {
         <div className="ShoutOutCard">
             <div>
                 { shoutOut.to === to ?
-                <h3 className="ShoutOutCard_from">Shout out to <Link to="/user/Zee">{shoutOut.to}</Link> </h3>
+                <h3 className="ShoutOutCard_to">Shout out to <Link to="/user/Zee">{shoutOut.to}</Link> </h3>
                 :
-                <h3 className="ShoutOutCard_from">Shout out to {shoutOut.to} </h3>
+                <h3 className="ShoutOutCard_to">Shout out to {shoutOut.to} </h3>
                 }
             </div>
             <div>

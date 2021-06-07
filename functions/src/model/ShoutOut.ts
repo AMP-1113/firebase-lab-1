@@ -5,4 +5,5 @@ export default interface ShoutOut {
     to: string;
     from: string;
     message: string;
+    profilePhoto?: string;
 }

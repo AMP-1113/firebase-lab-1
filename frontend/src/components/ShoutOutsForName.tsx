@@ -16,12 +16,11 @@ function ShoutOutsForName() {
     const [ shoutOutsLoaded, setShoutOutsLoaded ] = useState(false);
 
     useEffect(() => {
-        loadShoutOuts();
-      }, );
+        loadShoutOuts(to);
+      }, [to]);
     
       
-      function loadShoutOuts() {
-        console.log(to);
+      function loadShoutOuts(to: string) {
         readShoutOutsByTo(to).then(shoutOutsFromApi => {
           setShoutOuts(shoutOutsFromApi);
           setShoutOutsLoaded(true);
@@ -30,7 +29,7 @@ function ShoutOutsForName() {
     
       function handleDeleteShoutOut(shoutOutId: string|undefined): void {
         if (shoutOutId) {
-          deleteShoutOut(shoutOutId).then(loadShoutOuts);
+          deleteShoutOut(shoutOutId).then( () => loadShoutOuts(to));
         }
       }
     return (
