@@ -30,9 +30,11 @@ function ShoutOutCard({shoutOut, onDelete}: Props) {
                 <p className="ShoutOutCard_from">-from {shoutOut.from} </p>
                 }
             </div>
-
-            
             <p> {shoutOut.message} </p>
+            { !!shoutOut.profilePhoto && 
+            <p>
+                <img className="ShoutOutCard_photo" src={shoutOut.profilePhoto} />
+             </p> }
             <button onClick={onDelete}>Delete</button>
         </div>
     )
