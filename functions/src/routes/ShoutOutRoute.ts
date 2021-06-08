@@ -109,5 +109,26 @@ app.post("/", async (req, res) => {
     }
   });
 
+  // add like
+  app.put("/:id", async (req, res) => {
+    const id = req.params.id;
+    console.log(id)
+    const shoutOut = req.body as ShoutOut;
+    delete shoutOut._id;
+    try {
+      const client = await getClient();
+      const result = await client.db().collection<ShoutOut>('shoutOuts').replaceOne({ _id: new ObjectId(id) }, shoutOut);
+      if (result.modifiedCount === 0) {
+        res.status(404).json({message: "Not Found"});
+      } else {
+        shoutOut._id = new ObjectId(id);
+        res.json(shoutOut);
+      }
+    } catch (err) {
+      console.error("FAIL", err);
+      res.status(500).json({message: "Internal Server Error"});
+    }
+  });
+
 
 export default functions.https.onRequest(app);

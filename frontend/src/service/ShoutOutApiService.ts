@@ -23,3 +23,8 @@ export function createShoutOut(shoutOut: ShoutOut):Promise<ShoutOut> {
 export function deleteShoutOut(shoutOutId: string):Promise<void> {
     return axios.delete(`${baseUrl}/${encodeURIComponent(shoutOutId)}`);
   }
+
+export function addLike(shoutOut: ShoutOut, userUID: string):Promise<void> {
+  shoutOut.likesArray.push(userUID);
+  return axios.put(`${baseUrl}/${encodeURIComponent(shoutOut._id!)}`, shoutOut);
+}

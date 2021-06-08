@@ -21,7 +21,8 @@ function ShoutOutForm( {onSubmit}: Props ) {
         const shoutOut: ShoutOut = {
           to: to,
           from: user?.displayName,
-          message: message
+          message: message,
+          likesArray: []
         }
 
         const files = photoInputRef.current?.files;

@@ -32,6 +32,8 @@ function ShoutOutsForName() {
           deleteShoutOut(shoutOutId).then( () => loadShoutOuts(to));
         }
       }
+
+
     return (
         <div className="ShoutOutsForName">
             <h1>Shout Outs to Zee</h1>
@@ -42,7 +44,7 @@ function ShoutOutsForName() {
                 :                  
             shoutouts.map(eachShoutOut => 
                     <ShoutOutCard key={eachShoutOut._id} shoutOut={eachShoutOut}
-                                  onDelete={() => handleDeleteShoutOut(eachShoutOut._id)}
+                                  onDelete={() => handleDeleteShoutOut(eachShoutOut._id) }
                     />) }
         </div>
     )

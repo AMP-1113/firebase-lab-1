@@ -4,4 +4,5 @@ export default interface ShoutOut {
     from: any;
     message: string;
     profilePhoto?: string;
+    likesArray: string[];
 }

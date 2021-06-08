@@ -13,6 +13,7 @@ function ShoutOutList() {
   const [ shoutOutsLoaded, setShoutOutsLoaded ] = useState(false);
   const { user } = useContext(AuthContext)
 
+
   useEffect(() => {
     loadShoutOuts();
   }, []);
@@ -34,6 +35,7 @@ function ShoutOutList() {
     }
   }
 
+
     return (
         <div className="ShoutOutList">
               { !shoutOutsLoaded ?
@@ -43,7 +45,7 @@ function ShoutOutList() {
                 :
                   shoutouts.map(eachShoutOut => 
                     <ShoutOutCard key={eachShoutOut._id} shoutOut={eachShoutOut}
-                                  onDelete={() => handleDeleteShoutOut(eachShoutOut._id)}
+                                  onDelete={() => handleDeleteShoutOut(eachShoutOut._id) }
                     />)
               } 
               { !user ? 
