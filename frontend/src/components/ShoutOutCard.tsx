@@ -26,20 +26,18 @@ function ShoutOutCard({shoutOut, onDelete}: Props) {
         setlikesLoaded(true);
       }
 
-
-function handleAddLike(userUid: string): void {
-    if (!isInArray(userUid)) {
-        addLike(shoutOut, user?.uid!).then(loadLikes);
-        setlikesLoaded(false);
+    function handleAddLike(userUid: string): void {
+        if (!isInArray(userUid)) {
+            addLike(shoutOut, user?.uid!).then(loadLikes);
+            setlikesLoaded(false);
+        }
+        console.log(shoutOut.likesArray)
     }
-    console.log(shoutOut.likesArray)
-  }
 
-  function isInArray(uid: string) {
-    return shoutOut.likesArray.some(
-      (existingUid) => existingUid === uid);
-  }
-
+    function isInArray(uid: string) {
+        return shoutOut.likesArray.some(
+        (existingUid) => existingUid === uid);
+    }
 
     return (
         <div className="ShoutOutCard">
@@ -68,12 +66,12 @@ function handleAddLike(userUid: string): void {
                     : likes.length === 0 ?
                     <p className="ShoutOutList__message">No Likes</p>
                     :
-                    <p>{shoutOut.likesArray.length}</p>
+                    <p></p>
                 } 
              </div>
             <div className="ShoutOutCard_buttons">
                 <button onClick={onDelete}>Delete</button>
-                <button onClick={() => handleAddLike(user?.uid!)}>Like</button>
+                <button onClick={() => handleAddLike(user?.uid!)}>Likes: {shoutOut.likesArray.length}</button>
                 {/* <button onClick={() => handleAddLike(shoutOut._id)}>Like</button> */}
             </div>
         </div>
