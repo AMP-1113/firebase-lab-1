@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth-context";
 import ShoutOut from "../model/ShoutOut";
-import { addLike, readAllShoutOuts } from "../service/ShoutOutApiService";
+import { addLike } from "../service/ShoutOutApiService";
 import "./ShoutOutCard.css"
 
 interface Props {
@@ -15,28 +15,31 @@ interface RouteParams {
 }
 
 function ShoutOutCard({shoutOut, onDelete}: Props) {
-    const [ shoutouts, setShoutOuts ] = useState<ShoutOut[]>([]);
-    const [ shoutOutsLoaded, setShoutOutsLoaded ] = useState(false);
     const { to } = useParams<RouteParams>(); 
     const { user } = useContext(AuthContext);
+    const [ likes, setLikes ] = useState(['']);
+    const [ likesLoaded, setlikesLoaded ] = useState(true);
 
 
-  function loadShoutOuts() {
-    readAllShoutOuts().then(shoutOutsFromApi => {
-      setShoutOuts(shoutOutsFromApi);
-      setShoutOutsLoaded(true);
-    });
-  }
+    function loadLikes() {
+        setLikes(shoutOut.likesArray);
+        setlikesLoaded(true);
+      }
 
-  function handleAddLike(shoutOutId: string|undefined): void {
-    if (shoutOutId) {
-    //   shoutOut.likesArray.push(user?.uid!);
-      addLike(shoutOut, user?.uid!).then(loadShoutOuts);
-      console.log(shoutOut.likesArray);
-      console.log(shoutOut.likesArray.length);
+
+function handleAddLike(userUid: string): void {
+    if (!isInArray(userUid)) {
+        addLike(shoutOut, user?.uid!).then(loadLikes);
+        setlikesLoaded(false);
     }
+    console.log(shoutOut.likesArray)
   }
-    
+
+  function isInArray(uid: string) {
+    return shoutOut.likesArray.some(
+      (existingUid) => existingUid === uid);
+  }
+
 
     return (
         <div className="ShoutOutCard">
@@ -59,13 +62,19 @@ function ShoutOutCard({shoutOut, onDelete}: Props) {
             <p>
                 <img className="ShoutOutCard_photo" src={shoutOut.profilePhoto} alt="" />
              </p> }
-             <p>
-                 {shoutOut.likesArray.length}
-             </p>
+             <div>
+                { !likesLoaded ?
+                    <p className="ShoutOutList__message"> :-) </p>
+                    : likes.length === 0 ?
+                    <p className="ShoutOutList__message">No Likes</p>
+                    :
+                    <p>{shoutOut.likesArray.length}</p>
+                } 
+             </div>
             <div className="ShoutOutCard_buttons">
                 <button onClick={onDelete}>Delete</button>
-                <button onClick={() => handleAddLike(shoutOut._id)}>Like</button>
-                {/* <button onClick={shoutOut.likesArray?.map(eachShoutOut => shoutOut._id)}>Like</button> */}
+                <button onClick={() => handleAddLike(user?.uid!)}>Like</button>
+                {/* <button onClick={() => handleAddLike(shoutOut._id)}>Like</button> */}
             </div>
         </div>
     )
